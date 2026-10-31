@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f5f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#141312" media="(prefers-color-scheme: dark)">
+  <title>Traductor Quechua</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <h1>Traductor Quechua</h1>
+      <p>Español ⇄ quechua sureño, con OpenRouter.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <div class="card-head">
+          <label for="apiKey">API key de OpenRouter</label>
+          <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">Obtener key ↗</a>
+        </div>
+        <div class="key-row">
+          <input id="apiKey" type="password" placeholder="sk-or-v1-…" autocomplete="off" spellcheck="false">
+          <button id="toggleKey" class="btn ghost" type="button" aria-label="Mostrar API key">Ver</button>
+        </div>
+        <p class="hint">Se guarda solo en este navegador. No se envía a ningún otro sitio.</p>
+      </section>
+
+      <section class="card">
+        <div class="segmented" role="group" aria-label="Dirección de la traducción">
+          <button type="button" class="seg active" data-dir="es-qu" aria-pressed="true">Español → Quechua</button>
+          <button type="button" class="seg" data-dir="qu-es" aria-pressed="false">Quechua → Español</button>
+        </div>
+
+        <label for="input" class="sr-only">Texto a traducir</label>
+        <textarea id="input" rows="4" placeholder="Escribe una frase en español…"></textarea>
+
+        <div id="examples" class="examples" aria-label="Ejemplos"></div>
+
+        <div class="actions">
+          <button id="translate" class="btn primary" type="button">Traducir</button>
+          <span class="hint">Ctrl + Enter</span>
+        </div>
+      </section>
+
+      <section id="result" class="card result" hidden>
+        <div class="card-head">
+          <span class="label">Traducción</span>
+          <button id="copy" class="btn ghost small" type="button">Copiar</button>
+        </div>
+        <p id="output" class="output" aria-live="polite"></p>
+        <p id="meta" class="hint"></p>
+      </section>
+
+      <p id="error" class="error" role="alert" hidden></p>
+
+      <details class="card advanced">
+        <summary>Ajustes</summary>
+
+        <div class="field">
+          <label for="model">Modelo</label>
+          <input id="model" list="models" spellcheck="false" value="nvidia/nemotron-3-ultra-550b-a55b:free">
+          <datalist id="models">
+            <option value="nvidia/nemotron-3-ultra-550b-a55b:free">Nemotron 3 Ultra · gratis</option>
+            <option value="google/gemma-4-31b-it:free">Gemma 4 31B · gratis</option>
+            <option value="google/gemma-4-26b-a4b-it:free">Gemma 4 26B · gratis</option>
+            <option value="nvidia/nemotron-3.5-lightning:free">Nemotron 3.5 Lightning · gratis</option>
+            <option value="nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free">Nemotron 3 Nano Omni · gratis</option>
+          </datalist>
+          <p class="hint">Puedes escribir cualquier ID de <a href="https://openrouter.ai/models" target="_blank" rel="noopener">openrouter.ai/models</a>. Los modelos <code>:free</code> tienen límite diario.</p>
+        </div>
+
+        <div class="field">
+          <label for="variant">Variante</label>
+          <select id="variant">
+            <option value="sureno">Quechua sureño (Cusco-Collao)</option>
+            <option value="boliviano">Quechua boliviano</option>
+          </select>
+        </div>
+
+        <label class="check">
+          <input id="web" type="checkbox">
+          <span>Buscar en la web (plugin de OpenRouter)</span>
+        </label>
+        <p class="hint">Puede tener costo adicional y no siempre está disponible en modelos gratuitos.</p>
+      </details>
+    </main>
+
+    <footer>
+      <p>Las traducciones las genera un modelo de IA y pueden contener errores.</p>
+    </footer>
+  </div>
+
+  <noscript>Necesitas activar JavaScript para usar el traductor.</noscript>
+  <script src="app.js"></script>
+</body>
+</html>
